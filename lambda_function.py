@@ -10,7 +10,7 @@ def lambda_handler(event, context):
     payload = {
         "subnet_id": subnet_id,
         "name": "sainath kulsange",  # Replace with your full name
-        "email": "sainathkulsange60@example.com"  # Replace with your email
+        "email": "sainathkulsange60@gmail"  # Replace with your email
     }
 
     # API URL and headers
