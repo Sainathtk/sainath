@@ -1,29 +1,40 @@
-pipeline{
+pipeline {
     agent any
-    stages{
-        stage("TF Init"){
-            steps{
-                echo "Executing Terraform Init"
+    tools {
+        git 'Default'
+    }
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
             }
         }
-        stage("TF Validate"){
-            steps{
-                echo "Validating Terraform Code"
+        stage('Terraform Init') {
+            steps {
+                script {
+                    sh 'terraform init'
+                }
             }
         }
-        stage("TF Plan"){
-            steps{
-                echo "Executing Terraform Plan"
+        stage('Terraform Plan') {
+            steps {
+                script {
+                    sh 'terraform plan'
+                }
             }
         }
-        stage("TF Apply"){
-            steps{
-                echo "Executing Terraform Apply"
+        stage('Terraform Apply') {
+            steps {
+                script {
+                    sh 'terraform apply -auto-approve'
+                }
             }
         }
-        stage("Invoke Lambda"){
-            steps{
-                echo "Invoking your AWS Lambda"
+        stage('Invoke Lambda') {
+            steps {
+                script {
+                    sh 'aws lambda invoke --function-name myLambdaFunction --payload file://payload.json result.json'
+                }
             }
         }
     }
