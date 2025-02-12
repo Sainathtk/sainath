@@ -35,31 +35,9 @@ resource "aws_iam_role" "lambda_execution_role" {
   })
 }
 
-resource "aws_iam_policy" "lambda_policy" {
-  name        = "DevOps-Candidate-Lambda-Role"
-  description = "Lambda execution policy"
 
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Action   = "logs:*"
-        Effect   = "Allow"
-        Resource = "*"
-      },
-      {
-        Action   = "lambda:InvokeFunction"
-        Effect   = "Allow"
-        Resource = "*"
-      }
-    ]
-  })
-}
 
-resource "aws_iam_role_policy_attachment" "lambda_role_policy_attachment" {
-  policy_arn = aws_iam_policy.lambda_policy.arn
-  role       = aws_iam_role.lambda_execution_role.name
-}
+
 
 
 resource "aws_security_group" "lambda_sg" {
