@@ -52,8 +52,7 @@ resource "aws_lambda_function" "my_lambda" {
   role             = aws_iam_role.lambda_execution_role.arn
   handler          = "lambda_function.lambda_handler"
   runtime          = "python3.8"
-  security_group_ids = [aws_security_group.lambda_sg.id]
-  subnet_ids       = [aws_subnet.private_subnet.id]
+
 
   environment {
     variables = {
