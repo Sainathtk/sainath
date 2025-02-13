@@ -49,7 +49,6 @@ resource "aws_security_group" "lambda_sg" {
 resource "aws_lambda_function" "my_lambda" {
   filename         = "lambda_function.zip"  # Ensure you zip the Python code before uploading
   function_name    = "my_lambda_function"
-  role             = aws_iam_role.lambda_execution_role.arn
   handler          = "lambda_function.lambda_handler"
   runtime          = "python3.8"
 
